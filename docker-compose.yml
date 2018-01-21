@@ -21,7 +21,7 @@ services:
   portainer:
     image: portainer/portainer
     container_name: "portainer-app"
-#Automatically choose 'Manage the Docker instance where Portainer is running' by adding <--host=unix:///var/run/docker.sock> to the command
+    #Automatically choose 'Manage the Docker instance where Portainer is running' by adding <--host=unix:///var/run/docker.sock> to the command
     networks:
       - local
     volumes:
@@ -53,6 +53,15 @@ services:
     volumes:
       - nvidia_driver_367.57:/usr/local/nvidia:ro
   
+  cloudflare-ddns:
+    image: oznu/cloudflare-ddns
+    container_name: gardenminer-cloudflare-ddns
+    environment:
+    - EMAIL=hello@example.com
+    - API_KEY=xxxxxxx
+    - ZONE=example.com
+    - SUBDOMAIN=subdomain
+
 networks:
   local:
     driver: bridge
