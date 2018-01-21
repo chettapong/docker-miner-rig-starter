@@ -1,9 +1,5 @@
 version: '2'
 
-volumes:
-  nvidia_driver_367.57:
-    external: true
-
 services:
   nginx:
     image: nginx:alpine
@@ -29,29 +25,26 @@ services:
       - /opt/portainer/data:/data
     restart: always
 
-  ccminer:
-    image: gardenminer/miner
-    container_name: gardenminer-ccminer-lux
-    ports:
-      - "4068:4068"
-    environment:
-      - ALGO=phi1612
-      - MINING_POOL=stratum+tcp://pool.bsod.pw:11518
-      - USER_NAME=LUgAi9Gs5fW8MKf1ezyGNJbPRniVywo7hY
-      - PASSWORD=
-      - API_IP=0.0.0.0
-      - API_PORT=4068
-    volumes:
-      - nvidia_driver_367.57:/usr/local/nvidia:ro
-      - /etc/localtime:/etc/localtime:ro
+  # ccminer:
+  #   image: gardenminer/miner
+  #   container_name: gardenminer-ccminer-lux
+  #   ports:
+  #     - "4068:4068"
+  #   environment:
+  #     - ALGO=phi1612
+  #     - MINING_POOL=stratum+tcp://pool.bsod.pw:11518
+  #     - USER_NAME=LUgAi9Gs5fW8MKf1ezyGNJbPRniVywo7hY
+  #     - PASSWORD=
+  #     - API_IP=0.0.0.0
+  #     - API_PORT=4068
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
 
-  nvidia-smi:
-    image: gardenminer/nvidia-smi
-    container_name: gardenminer-nvidia-smi
-    ports:
-      - "9202:9202"
-    volumes:
-      - nvidia_driver_367.57:/usr/local/nvidia:ro
+  # nvidia-smi:
+  #   image: gardenminer/nvidia-smi
+  #   container_name: gardenminer-nvidia-smi
+  #   ports:
+  #     - "9202:9202"
   
   cloudflare-ddns:
     image: oznu/cloudflare-ddns
